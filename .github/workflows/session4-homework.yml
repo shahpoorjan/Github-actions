@@ -28,6 +28,4 @@ jobs:
         id: Generate_value
         run: echo "CUSTOM_MESSAGE=Workflow for ${{env.PROJECT_NAME}}, running on branch ${{ github.ref_name }}." >> $GITHUB_OUTPUT
       - name: Print Message from Previous Step
-        run: echo "Message from previous job ${{ steps.Generate_value.outputs.CUSTOM_MESSAGE }}"
-
-    
+        run: echo "Message from previous job ${{ steps.Generate_value.outputs.CUSTOM_MESSAGE }}   ## for me << steps.id.outputs.massege
