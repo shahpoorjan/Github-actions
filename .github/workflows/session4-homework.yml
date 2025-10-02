@@ -1,0 +1,33 @@
+name: Session4 Homework Workflow
+on:
+  push:
+    branches:
+     - feature/session4-homework
+  workflow_dispatch:
+env:
+  PROJECT_NAME: "Session4 Homework"
+
+##### JObs ############
+jobs:
+  info-collection:
+    runs-on: ubuntu-latest
+    env:
+       ENVIRONMENT_TYPE: "Development"   ### envirnomental variables
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: Show All Environment Variables
+        run: |
+          echo ${{ env.PROJECT_NAME }}
+          echo ${{ env.ENVIRONMENT_TYPE }}
+          echo "GitHub Actor: ${{ github.actor }}"
+          echo "GitHub Workflow: ${{ github.workflow }}"
+        
+      - name: Generate Custom Output
+        id: Generate_value
+        run: echo "CUSTOM_MESSAGE=Workflow for ${{env.PROJECT_NAME}}, running on branch ${{ github.ref_name }}." >> $GITHUB_OUTPUT
+      - name: Print Message from Previous Step
+        run: echo "Message from previous job ${{ steps.Generate_value.outputs.CUSTOM_MESSAGE }}"
+
+    
